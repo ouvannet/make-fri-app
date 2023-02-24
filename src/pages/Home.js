@@ -30,7 +30,7 @@ const Home = () => {
     const [url, setUrl] = useState(null);
     const [loca,setloca]=useState();
     const{name,img,age}=state;
-    const history=useNavigate();
+    const histor=useNavigate();
 
 
     function genRandonString(length) {
@@ -123,7 +123,7 @@ const Home = () => {
             toast.success("Contact Added Successfully");
           }
         });
-        setTimeout(()=> history.push("/"),500);
+        setTimeout(window.location.reload(false),500);
       }
       // window.location.reload(false);
     };
