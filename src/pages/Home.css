@@ -250,3 +250,37 @@
     margin-top: 10px;
     background: #5bcfff;
 }
+
+.show_viewer{
+    border: 0px solid;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 46px;
+    bottom: 0px;
+    overflow: scroll;
+}
+.containerpic{
+    margin: auto;
+    width: 80%;
+    border: 0px solid black;
+    margin-top: 20px;
+}
+.forname{
+    border: 0px solid black;
+    width: 100%;
+    border-radius: 7px;
+    font-size: 19px;
+    background: #2cacf6;
+}
+.forname1{
+    border: 0px solid black;
+    width: 93%;
+    border-radius: 7px;
+    text-align: left;
+    font-size: 19px;
+    background: #2cf6b3;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 5px;
+}

@@ -106,6 +106,7 @@ const Home = () => {
         }
     },[]);
 
+    console.log(data);
     const handleInputChange=(e)=>{
       const {name, value}=e.target;
       setState({...state,[name]: value});
@@ -129,6 +130,42 @@ const Home = () => {
     };
   return (
     <div>
+      <div className='show_viewer'>
+      {Object.keys(data).reverse().map((id, index)=>{
+              
+              return(
+                <div className='containerpic'>
+                  <img src={data[id].url} width="100%"/>
+
+                    <div className='forname'>{data[id].name}</div>
+                    <div className='forname1'>Age: {data[id].age}<br/><img src="https://img.utdstc.com/icon/fe0/ab6/fe0ab67fa0de2b2681602db5708a076f50dd21106e0c2d38b9661875a37e235e:200" width="16px" style={{marginTop:"5px",borderRadius:"5px"}}/> {data[id].facebook}<br/>{data[id].message}</div>
+                </div>
+              )
+
+      })}
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div className='upload'>
             <div className='upload1' onClick={countbtn}>
