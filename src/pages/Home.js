@@ -3,6 +3,7 @@ import axios from "axios";
 import fireDb from "../firebase";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 // import Telegram from 'telegram-send-message';
 // import {Link} from "telegram-send-message";
 import "./Home.css";
@@ -13,20 +14,23 @@ import {ref,uploadBytes,getDownloadURL} from "firebase/storage";
 import { from } from 'form-data';
 
 const initialState = {
-  img:"",
+  url:"",
   name:"",
   age:"",
   message:"",
 }
 
+
 const Home = () => {
-  const [state,setState]=useState(initialState);
+    const [state,setState]=useState(initialState);
     const [data, setData]=useState({});
     const [count, setCount]=useState(1);
     const [count1, setCount1]=useState(1);
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState(null);
     const [loca,setloca]=useState();
+    const{name,img,age}=state;
+    const history=useNavigate();
 
 
     function genRandonString(length) {
@@ -49,7 +53,7 @@ const Home = () => {
        alert(value);
        console.log(state);
      }
-     var ii=0;
+
      if(image!=null){
       console.log("img");
       console.log(image);
@@ -70,7 +74,7 @@ const Home = () => {
       });
       setImage(null);
     }
-     console.log(image);
+     console.log(url);
 
     var countbtn=function(){
       if(count==1){
@@ -101,6 +105,28 @@ const Home = () => {
           setData({});
         }
     },[]);
+
+    const handleInputChange=(e)=>{
+      const {name, value}=e.target;
+      setState({...state,[name]: value});
+    };
+    console.log(state);
+    const handleSubmit=(e)=>{
+      e.preventDefault();
+      if(!name || !age || !url){
+        toast.error("Please provide value in each input field");
+      }else{
+        fireDb.child("contacts").push(state,(err)=>{
+          if(err){
+            toast.error(err);
+          }else{
+            toast.success("Contact Added Successfully");
+          }
+        });
+        setTimeout(()=> history.push("/"),500);
+      }
+      // window.location.reload(false);
+    };
   return (
     <div>
 
@@ -123,20 +149,48 @@ const Home = () => {
               <img src="https://i.pinimg.com/originals/30/9a/e5/309ae59b0f6d42210ce1f0ffb6c4db83.jpg" width="100px" style={{borderRadius:"10px",marginRight:"5px"}} />
               <img src="https://i.pinimg.com/originals/a5/65/b3/a565b32ffdcd817364464481d2d58358.jpg" width="67px" style={{borderRadius:"10px"}}  />
               <p>Upload Photo</p>
-              <img src="https://i.pinimg.com/originals/71/c9/21/71c92110d2a9871147082458f203aa96.jpg" width="100%" style={{borderRadius:"10px"}}></img>
+              <img src={`${url?url:"https://i.pinimg.com/originals/71/c9/21/71c92110d2a9871147082458f203aa96.jpg"}`} width="100%" style={{borderRadius:"10px"}}></img>
               </label>
               <input  type="file" id="file" name='img' onChange={handleImageChange}/>
-              
               <br/>
-              <input type="text" className='inputform' placeholder='Name...' maxlength="20" size="20"></input><br />
+              <input
+               type="text" 
+               className='inputform' 
+               id="name"
+               name="name"
+               onChange={handleInputChange}
+               placeholder='Name...' 
+               maxlength="20" 
+               size="20"></input><br />
               <br/>
-              <input type="text" className='inputform' placeholder='Age...' maxlength="4" size="4"></input><br />
+              <input
+               type="text" 
+               className='inputform' 
+               id="age"
+               name="age"
+               onChange={handleInputChange}
+               placeholder='Age...' 
+               maxlength="4" 
+               size="4"></input><br />
               <br/>
-              <input type="text" className='inputform' placeholder='FaceBook...'></input><br />
+              <input
+               type="text"
+               className='inputform' 
+               id="facebook"
+               name="facebook"
+               onChange={handleInputChange}
+               placeholder='FaceBook...'></input><br />
 
-              <textarea className='inputform2' placeholder='Message' rows="4" cols="50"></textarea><br></br>
+              <textarea
+               className='inputform2' 
+               id="message"
+               name="message"
+               onChange={handleInputChange}
+               placeholder='Message...' 
+               rows="4" 
+               cols="50"></textarea><br></br>
 
-              <button className='inputform3'>Send</button>
+              <button onClick={handleSubmit} className='inputform3'>Send</button>
 
               <br></br>
               <br></br>
