@@ -8,11 +8,69 @@ import {useLocation} from "react-router-dom";
 import "./Home.css";
 import {set} from "firebase/database";
 import {toast} from "react-toastify";
+import { storage } from '../firebase';
+import {ref,uploadBytes,getDownloadURL} from "firebase/storage";
+import { from } from 'form-data';
+
+const initialState = {
+  img:"",
+  name:"",
+  age:"",
+  message:"",
+}
 
 const Home = () => {
+  const [state,setState]=useState(initialState);
     const [data, setData]=useState({});
     const [count, setCount]=useState(1);
     const [count1, setCount1]=useState(1);
+    const [image, setImage] = useState(null);
+    const [url, setUrl] = useState(null);
+    const [loca,setloca]=useState();
+
+
+    function genRandonString(length) {
+      var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      var charLength = chars.length;
+      var result = '';
+      for ( var i = 0; i < length; i++ ) {
+         result += chars.charAt(Math.floor(Math.random() * charLength));
+      }
+      return result;
+    }
+
+    const handleImageChange = (e) =>{
+      if(e.target.files[0]){
+        setImage(e.target.files[0]);
+      }
+       const {name,value}=e.target;
+       setloca(value);
+       alert(image);
+       alert(value);
+       console.log(state);
+     }
+     var ii=0;
+     if(image!=null){
+      console.log("img");
+      console.log(image);
+      const imageRef = ref(storage, genRandonString(60));
+      uploadBytes(imageRef, image).then(() =>{
+        getDownloadURL(imageRef).then((url) =>{
+          setUrl(url);
+          setState({...state, url});
+          
+        }).catch(error =>{
+          console.log(error.message, "error image url");
+        });
+        setImage(null);
+        
+      })
+      .catch(error =>{
+        console.log(error.message);
+      });
+      setImage(null);
+    }
+     console.log(image);
 
     var countbtn=function(){
       if(count==1){
@@ -45,10 +103,6 @@ const Home = () => {
     },[]);
   return (
     <div>
-        <h2>Home</h2>
-
-
-
 
         <div className='upload'>
             <div className='upload1' onClick={countbtn}>
@@ -62,16 +116,16 @@ const Home = () => {
             </div>
         </div>
         <div className='CreatePost' style={{bottom:`${count1==1?"-603px":"0px"}`,display:`${count1==1?"none":""}`}}>
-            <div style={{border:"1px solid black",height:"5%",textAlign:"center",fontSize:"21px"}}>Upload<div style={{width:"30px",height:"30px",float:"right",border:"0px solid black"}}>X</div></div>
+            <div style={{border:"0px solid black",height:"5%",textAlign:"center",fontSize:"21px"}}>Upload<div onClick={countbtn1} style={{width:"30px",height:"30px",float:"right",border:"0px solid black"}}>X</div></div>
 
-            <div style={{width:"100%",border:"1px solid black",height:"95%",overflow:"scroll"}}>
+            <div style={{width:"100%",border:"0px solid black",height:"95%",overflow:"scroll"}}>
               <label for="file" class="file-style">
               <img src="https://i.pinimg.com/originals/30/9a/e5/309ae59b0f6d42210ce1f0ffb6c4db83.jpg" width="100px" style={{borderRadius:"10px",marginRight:"5px"}} />
               <img src="https://i.pinimg.com/originals/a5/65/b3/a565b32ffdcd817364464481d2d58358.jpg" width="67px" style={{borderRadius:"10px"}}  />
               <p>Upload Photo</p>
               <img src="https://i.pinimg.com/originals/71/c9/21/71c92110d2a9871147082458f203aa96.jpg" width="100%" style={{borderRadius:"10px"}}></img>
               </label>
-              <input type="file" id="file" />
+              <input  type="file" id="file" name='img' onChange={handleImageChange}/>
               
               <br/>
               <input type="text" className='inputform' placeholder='Name...' maxlength="20" size="20"></input><br />
