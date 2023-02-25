@@ -136,9 +136,8 @@ const Home = () => {
               return(
                 <div className='containerpic'>
                   <img src={data[id].url} width="100%"/>
-
                     <div className='forname'>{data[id].name}</div>
-                    <div className='forname1'>Age: {data[id].age}<br/><img src="https://img.utdstc.com/icon/fe0/ab6/fe0ab67fa0de2b2681602db5708a076f50dd21106e0c2d38b9661875a37e235e:200" width="16px" style={{marginTop:"5px",borderRadius:"5px"}}/> {data[id].facebook}<br/>{data[id].message}</div>
+                    <div className='forname1'>Age: {data[id].age}<img src="https://img.utdstc.com/icon/fe0/ab6/fe0ab67fa0de2b2681602db5708a076f50dd21106e0c2d38b9661875a37e235e:200" width="16px" style={{marginTop:"5px",borderRadius:"5px",marginLeft:"10px"}}/> {data[id].facebook}<br/>{data[id].message}</div>
                 </div>
               )
 
@@ -169,12 +168,21 @@ const Home = () => {
 
         <div className='upload'>
             <div className='upload1' onClick={countbtn}>
-                <img src="https://cdn-icons-png.flaticon.com/512/126/126477.png" width="60%"></img>
+            <video width="90%" style={{borderRadius:"50%"}} preload="none"  autoplay="autoplay" loop="true" muted="muted" playsinline="">
+              <source src="https://cdn-icons-mp4.flaticon.com/512/6172/6172518.mp4" type="video/mp4" />
+            </video>
+                {/* <img src="https://cdn-icons-png.flaticon.com/512/126/126477.png" width="60%"></img> */}
             </div>
             <div className='upload2' onClick={countbtn1} style={{display:`${count==1?"none":""}`}}>
-                Create post
+              <video width="20%" style={{borderRadius:"50%",marginRight:"6px"}} preload="none"  autoplay="autoplay" loop="true" muted="muted" playsinline="">
+                <source src="https://cdn-icons-mp4.flaticon.com/512/7740/7740748.mp4" type="video/mp4" />
+              </video>
+              Create post
             </div>
             <div className='upload3' style={{display:`${count==1?"none":""}`}}>
+              <video width="20%" style={{borderRadius:"50%",marginRight:"6px"}} preload="none"  autoplay="autoplay" loop="true" muted="muted" playsinline="">
+                <source src="https://cdn-icons-mp4.flaticon.com/512/7740/7740748.mp4" type="video/mp4" />
+              </video>
                 Your profile
             </div>
         </div>
@@ -227,7 +235,11 @@ const Home = () => {
                rows="4" 
                cols="50"></textarea><br></br>
 
-              <button onClick={handleSubmit} className='inputform3'>Send</button>
+              <button onClick={handleSubmit} className='inputform3'>
+                Send
+              <img  alt="Send SVG Vector Icon" src="https://www.svgrepo.com/show/230979/send.svg"  decoding="async" height="90%"/>
+              <img  alt="Send SVG Vector Icon" src="https://www.svgrepo.com/show/230979/send.svg"  decoding="async" height="90%"/>
+              </button>
 
               <br></br>
               <br></br>

@@ -168,10 +168,11 @@
     align-items: center;
     justify-content: center;
     background: #5bcfff;
+    overflow: hidden;
 }
 .upload2{
     border: 1px solid;
-    width: 115px;
+    width: 125px;
     height: 70%;
     display: flex;
     align-items: center;
@@ -265,13 +266,15 @@
     width: 80%;
     border: 0px solid black;
     margin-top: 20px;
+    /* background-color: #ff813d; */
+    border-radius: 10px;
 }
 .forname{
     border: 0px solid black;
     width: 100%;
     border-radius: 7px;
     font-size: 19px;
-    background: #2cacf6;
+    background: #00a2ff;
 }
 .forname1{
     border: 0px solid black;
