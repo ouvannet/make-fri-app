@@ -18,6 +18,10 @@ const initialState = {
   name:"",
   age:"",
   message:"",
+  react1:0,
+  react2:0,
+  react3:0,
+  react4:0,
 }
 
 
@@ -138,6 +142,40 @@ const Home = () => {
                   <img src={data[id].url} width="100%"/>
                     <div className='forname'>{data[id].name}</div>
                     <div className='forname1'>Age: {data[id].age}<img src="https://img.utdstc.com/icon/fe0/ab6/fe0ab67fa0de2b2681602db5708a076f50dd21106e0c2d38b9661875a37e235e:200" width="16px" style={{marginTop:"5px",borderRadius:"5px",marginLeft:"10px"}}/> {data[id].facebook}<br/>{data[id].message}</div>
+                    <div style={{width:"100%",border:"0px solid black",height:"40px",marginTop:"5px",display:"flex"}}>
+                      <table border="0px" style={{height:"100%",background:"#28f2e1",borderRadius:"5px"}}>
+                        <tbody>
+                          <tr>
+                            <td><img src='https://cdn-icons-png.flaticon.com/512/2589/2589175.png' height="30px"></img></td>
+                            <td width="60%">{data[id].react1}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table border="0px" style={{height:"100%",background:"#28f2e1",marginLeft:"10px",borderRadius:"5px"}}>
+                        <tbody>
+                          <tr>
+                            <td><img src='https://cdn-icons-png.flaticon.com/512/2589/2589220.png' height="30px"></img></td>
+                            <td width="60%">{data[id].react1}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table border="0px" style={{height:"100%",background:"#28f2e1",marginLeft:"10px",borderRadius:"5px"}}>
+                        <tbody>
+                          <tr>
+                            <td><img src='https://cdn-icons-png.flaticon.com/512/2307/2307753.png' height="25px"></img></td>
+                            <td width="60%">{data[id].react1}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table border="0px" style={{height:"100%",background:"#28f2e1",marginLeft:"10px",borderRadius:"5px"}}>
+                        <tbody>
+                          <tr>
+                            <td><img src='https://cdn-icons-png.flaticon.com/512/2307/2307739.png' height="25px"></img></td>
+                            <td width="60%">{data[id].react1}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                 </div>
               )
 
@@ -168,19 +206,19 @@ const Home = () => {
 
         <div className='upload'>
             <div className='upload1' onClick={countbtn}>
-            <video width="90%" style={{borderRadius:"50%"}} preload="none"  autoplay="autoplay" loop="true" muted="muted" playsinline="">
+            <video width="90%" style={{borderRadius:"50%"}} preload="none"  autoPlay="autoplay" loop={true} muted="muted" >
               <source src="https://cdn-icons-mp4.flaticon.com/512/6172/6172518.mp4" type="video/mp4" />
             </video>
                 {/* <img src="https://cdn-icons-png.flaticon.com/512/126/126477.png" width="60%"></img> */}
             </div>
             <div className='upload2' onClick={countbtn1} style={{display:`${count==1?"none":""}`}}>
-              <video width="20%" style={{borderRadius:"50%",marginRight:"6px"}} preload="none"  autoplay="autoplay" loop="true" muted="muted" playsinline="">
+              <video width="20%" style={{borderRadius:"50%",marginRight:"6px"}} preload="none"  autoPlay="autoplay" loop={true} muted="muted" >
                 <source src="https://cdn-icons-mp4.flaticon.com/512/7740/7740748.mp4" type="video/mp4" />
               </video>
               Create post
             </div>
             <div className='upload3' style={{display:`${count==1?"none":""}`}}>
-              <video width="20%" style={{borderRadius:"50%",marginRight:"6px"}} preload="none"  autoplay="autoplay" loop="true" muted="muted" playsinline="">
+              <video width="20%" style={{borderRadius:"50%",marginRight:"6px"}} preload="none"  autoPlay="autoplay" loop={true} muted="muted">
                 <source src="https://cdn-icons-mp4.flaticon.com/512/7740/7740748.mp4" type="video/mp4" />
               </video>
                 Your profile
@@ -190,7 +228,7 @@ const Home = () => {
             <div style={{border:"0px solid black",height:"5%",textAlign:"center",fontSize:"21px"}}>Upload<div onClick={countbtn1} style={{width:"30px",height:"30px",float:"right",border:"0px solid black"}}>X</div></div>
 
             <div style={{width:"100%",border:"0px solid black",height:"95%",overflow:"scroll"}}>
-              <label for="file" class="file-style">
+              <label htmlFor="file" className="file-style">
               <img src="https://i.pinimg.com/originals/30/9a/e5/309ae59b0f6d42210ce1f0ffb6c4db83.jpg" width="100px" style={{borderRadius:"10px",marginRight:"5px"}} />
               <img src="https://i.pinimg.com/originals/a5/65/b3/a565b32ffdcd817364464481d2d58358.jpg" width="67px" style={{borderRadius:"10px"}}  />
               <p>Upload Photo</p>
@@ -205,7 +243,7 @@ const Home = () => {
                name="name"
                onChange={handleInputChange}
                placeholder='Name...' 
-               maxlength="20" 
+               maxLength="20" 
                size="20"></input><br />
               <br/>
               <input
@@ -215,7 +253,7 @@ const Home = () => {
                name="age"
                onChange={handleInputChange}
                placeholder='Age...' 
-               maxlength="4" 
+               maxLength="4" 
                size="4"></input><br />
               <br/>
               <input
