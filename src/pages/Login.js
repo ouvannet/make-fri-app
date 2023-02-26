@@ -213,7 +213,7 @@ const Login = () => {
         </form>
       ):(
         Object.keys(data).map((id, index)=>{
-          if(data[id].name==sessionStorage.getItem("Username")){
+          if(data[id].name==sessionStorage.getItem("Username") && data[id].password==sessionStorage.getItem("Password")){
             return(
               <div style={{width:"100%",border:"0px solid black",height:"95%",overflow:"scroll"}}>
                     <label htmlFor="file" className="file-style">
