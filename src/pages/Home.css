@@ -260,12 +260,13 @@
     top: 46px;
     bottom: 0px;
     overflow: scroll;
+    padding-bottom: 50px;
 }
 .containerpic{
     margin: auto;
     width: 80%;
     border: 0px solid black;
-    margin-top: 20px;
+    margin-bottom: 40px;
     /* background-color: #ff813d; */
     border-radius: 10px;
 }

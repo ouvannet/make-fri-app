@@ -9,6 +9,7 @@ import View from './pages/View';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path='/update/:id' element={<AddEdit />}></Route>
           <Route exact path='/view/:id' element={<View />}></Route>
           <Route exact path='/about' element={<About />}></Route>
+          <Route exact path='/login' element={<Login />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

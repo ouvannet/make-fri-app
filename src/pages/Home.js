@@ -56,7 +56,7 @@ const Home = () => {
        alert(image);
        alert(value);
        console.log(state);
-     }
+    }
 
      if(image!=null){
       console.log("img");
@@ -139,7 +139,7 @@ const Home = () => {
               
               return(
                 <div className='containerpic'>
-                  <img src={data[id].url} width="100%"/>
+                    <img src={data[id].url} width="100%" style={{borderRadius:"5px"}}/>
                     <div className='forname'>{data[id].name}</div>
                     <div className='forname1'>Age: {data[id].age}<img src="https://img.utdstc.com/icon/fe0/ab6/fe0ab67fa0de2b2681602db5708a076f50dd21106e0c2d38b9661875a37e235e:200" width="16px" style={{marginTop:"5px",borderRadius:"5px",marginLeft:"10px"}}/> {data[id].facebook}<br/>{data[id].message}</div>
                     <div style={{width:"100%",border:"0px solid black",height:"40px",marginTop:"5px",display:"flex"}}>
@@ -182,23 +182,6 @@ const Home = () => {
       })}
 
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

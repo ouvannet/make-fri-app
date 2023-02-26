@@ -14,29 +14,24 @@ const Header = () => {
                     Home
                 </p>
             </Link>
-            {sessionStorage.getItem("Login")!=null?(
+            {/* {sessionStorage.getItem("Login")!=null?(
 
-                (sessionStorage.getItem("Login") =="vannet123"?(
-                    <Link to="/add">
-                        <p className={`${activeTab === "AddContact" ? "active" : ""}`} onClick={()=>setActiveTab("AddContact")}>
-                            Add Product
-                        </p>
-                    </Link>
-                ):(
-                    <Link to="/chat">
-                            <p className={`${activeTab === "Chat" ? "active" : ""}`} onClick={()=>setActiveTab("Chat")}>
-                                Chat
-                            </p>
-                    </Link>
-                ))
-                
-            ):(
-                <Link to="/login">
+                <Link to="/add">
                     <p className={`${activeTab === "AddContact" ? "active" : ""}`} onClick={()=>setActiveTab("AddContact")}>
-                        Login
+                        Profile
                     </p>
                 </Link>
-            )}
+            ):( */}
+                <Link to="/login">
+                    <p className={`${activeTab === "AddContact" ? "active" : ""}`} onClick={()=>setActiveTab("AddContact")}>
+                    {sessionStorage.getItem("Login")==null?(
+                        "Login"
+                        ):(
+                           "Profile" 
+                        )}
+                    </p>
+                </Link>
+            {/* )} */}
             {/* <Link to="/about">
                 <p className={`${activeTab === "About" ? "active" : ""}`} onClick={()=>setActiveTab("About")}>
                     About
