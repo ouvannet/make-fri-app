@@ -160,7 +160,7 @@ const Login = () => {
           }else{
             toast.success("Register");
           }
-          // setTimeout(()=> window.location.reload(false),500);
+          setTimeout(window.location.reload(false),500);
         }
         // window.location.reload(false);
     }
