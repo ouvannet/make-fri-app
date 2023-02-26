@@ -18,13 +18,15 @@ const initialState = {
     react3:0,
     react4:0,
   }
+  
   const initialState1 = {
     name: sessionStorage.getItem("Username"),
     password: sessionStorage.getItem("Password"),
-    url:"",
-    name1:"",
-    age:"",
-    message:"",
+    url:sessionStorage.getItem("url"),
+    name1:sessionStorage.getItem("name1"),
+    age:sessionStorage.getItem("age"),
+    message:sessionStorage.getItem("message"),
+    facebook:sessionStorage.getItem("facebook"),
     react1:0,
     react2:0,
     react3:0,
@@ -61,8 +63,8 @@ const Login = () => {
         }
          const {name,value}=e.target;
          setloca(value);
-         alert(image);
-         alert(value);
+        //  alert(image);
+        //  alert(value);
          console.log(state);
       }
        if(image!=null){
@@ -163,13 +165,23 @@ const Login = () => {
         // window.location.reload(false);
     }
 
+    {Object.keys(data).map((id, index)=>{
+      if(data[id].name==sessionStorage.getItem("Username") && data[id].password==sessionStorage.getItem("Password")){
+        sessionStorage.setItem("name1",data[id].name1);
+        sessionStorage.setItem("age",data[id].age);
+        sessionStorage.setItem("facebook",data[id].facebook);
+        sessionStorage.setItem("message",data[id].message);
+        sessionStorage.setItem("url",data[id].url);
+      }
+    })}
+
 
     const setProfile=(e)=>{
       e.preventDefault();
       alert(name1);
-      if(!name1){
-        toast.error("Please provide value in each input field");
-      }else{
+      // if(!name1){
+      //   toast.error("Please provide value in each input field");
+      // }else{
         {Object.keys(data).map((id, index)=>{
           if(data[id].name==sessionStorage.getItem("Username") && data[id].password==sessionStorage.getItem("Password")){
               fireDb.child(`user/${id}`).set(state1,(err)=>{
@@ -184,7 +196,7 @@ const Login = () => {
             }
             console.log(data[id]);
           })}
-        }
+        // }
       // window.location.reload(false);
     };
   return (
@@ -200,66 +212,69 @@ const Login = () => {
             <button onClick={userLogin} className="btn_submit" style={{border:"2px solid rgb(255 106 0)",width:"50%",height:"30px",borderRadius:"5px",fontSize:"19px"}}>click</button>
         </form>
       ):(
-        // Object.keys(data).map((id, index)=>{})
-        <div style={{width:"100%",border:"0px solid black",height:"95%",overflow:"scroll"}}>
-              <label htmlFor="file" className="file-style">
-              <img src="https://i.pinimg.com/originals/30/9a/e5/309ae59b0f6d42210ce1f0ffb6c4db83.jpg" width="100px" style={{borderRadius:"10px",marginRight:"5px"}} />
-              <img src="https://i.pinimg.com/originals/a5/65/b3/a565b32ffdcd817364464481d2d58358.jpg" width="67px" style={{borderRadius:"10px"}}  />
-              <p>Upload Photo</p>
-              <img src={`${url?url:"https://i.pinimg.com/originals/71/c9/21/71c92110d2a9871147082458f203aa96.jpg"}`} width="100%" style={{borderRadius:"10px"}}></img>
-              </label>
-              <input
-                type="file" 
-                id="file" name='img' 
-                onChange={handleImageChange}
-                />
-              <br/>
-              <input
-               type="text" 
-               className='inputform' 
-               id="name1"
-               name="name1"
-               onChange={handleInputChange}
-               placeholder='Name...' 
-               maxLength="20" 
-               size="20"></input><br />
-              <br/>
-              <input
-               type="text" 
-               className='inputform' 
-               id="age"
-               name="age"
-               onChange={handleInputChange}
-               placeholder='Age...' 
-               maxLength="4" 
-               size="4"></input><br />
-              <br/>
-              <input
-               type="text"
-               className='inputform' 
-               id="facebook"
-               name="facebook"
-               onChange={handleInputChange}
-               placeholder='FaceBook...'></input><br />
+        Object.keys(data).map((id, index)=>{
+          return(
+            <div style={{width:"100%",border:"0px solid black",height:"95%",overflow:"scroll"}}>
+                  <label htmlFor="file" className="file-style">
+                  <img src="https://i.pinimg.com/originals/30/9a/e5/309ae59b0f6d42210ce1f0ffb6c4db83.jpg" width="100px" style={{borderRadius:"10px",marginRight:"5px"}} />
+                  <img src="https://i.pinimg.com/originals/a5/65/b3/a565b32ffdcd817364464481d2d58358.jpg" width="67px" style={{borderRadius:"10px"}}  />
+                  <p>Upload Photo</p>
+                  <img src={`${url?url:data[id].url}`} width="100%" style={{borderRadius:"10px"}}></img>
+                  </label>
+                  <input
+                    type="file" 
+                    id="file" name='img' 
+                    onChange={handleImageChange}
+                    />
+                  <br/>
+                  <input
+                  type="text" 
+                  className='inputform' 
+                  id="name1"
+                  name="name1"
+                  onChange={handleInputChange}
+                  placeholder={data[id].name1 != ""?data[id].name1:"Name..."} 
+                  maxLength="20" 
+                  size="20"></input><br />
+                  <br/>
+                  <input
+                  type="text" 
+                  className='inputform' 
+                  id="age"
+                  name="age"
+                  onChange={handleInputChange}
+                  placeholder={data[id].age != ""?data[id].age:"Age..."} 
+                  maxLength="4" 
+                  size="4"></input><br />
+                  <br/>
+                  <input
+                  type="text"
+                  className='inputform' 
+                  id="facebook"
+                  name="facebook"
+                  onChange={handleInputChange}
+                  placeholder={data[id].facebook != ""?data[id].facebook:"Facebook..."} ></input><br />
 
-              <textarea
-               className='inputform2' 
-               id="message"
-               name="message"
-               onChange={handleInputChange}
-               placeholder='Message...' 
-               rows="4" 
-               cols="50"></textarea><br></br>
+                  <textarea
+                  className='inputform2' 
+                  id="message"
+                  name="message"
+                  onChange={handleInputChange}
+                  placeholder={data[id].message != ""?data[id].message:"Message..."}  
+                  rows="4" 
+                  cols="50"></textarea><br></br>
 
-              <button  className='inputform3' onClick={setProfile}>
-                Send
-              <img  alt="Send SVG Vector Icon" src="https://www.svgrepo.com/show/230979/send.svg"  decoding="async" height="90%"/>
-              <img  alt="Send SVG Vector Icon" src="https://www.svgrepo.com/show/230979/send.svg"  decoding="async" height="90%"/>
-              </button>
+                  <button  className='inputform3' onClick={setProfile}>
+                    Save
+                  <img  alt="Send SVG Vector Icon" src="https://www.svgrepo.com/show/230979/send.svg"  decoding="async" height="90%"/>
+                  <img  alt="Send SVG Vector Icon" src="https://www.svgrepo.com/show/230979/send.svg"  decoding="async" height="90%"/>
+                  </button>
+                  <div style={{marginBottom:"100px"}}/>
+                </div>
 
-              <br></br>
-              <br></br>
-            </div>
+          )
+
+        })
       )}
     </div>
   )

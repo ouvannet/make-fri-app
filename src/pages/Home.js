@@ -53,8 +53,8 @@ const Home = () => {
       }
        const {name,value}=e.target;
        setloca(value);
-       alert(image);
-       alert(value);
+      //  alert(image);
+      //  alert(value);
        console.log(state);
     }
 
