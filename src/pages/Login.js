@@ -157,10 +157,12 @@ const Login = () => {
                 toast.success("Contact Added Successfully");
               }
             });
+            setTimeout(window.location.reload(false),500);
           }else{
             toast.success("Register");
+            setTimeout(window.location.reload(false),500);
           }
-          setTimeout(window.location.reload(false),500);
+          
         }
         // window.location.reload(false);
     }
