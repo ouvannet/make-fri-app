@@ -136,7 +136,7 @@ const Login = () => {
         console.log(userinput2);
         
         e.preventDefault();
-        alert(name);
+        // alert(name);
         if(!name || !password){
           toast.error("Please provide value in each input field");
         }else{
@@ -160,7 +160,7 @@ const Login = () => {
           }else{
             toast.success("Register");
           }
-          setTimeout(()=> window.location.reload(false),500);
+          // setTimeout(()=> window.location.reload(false),500);
         }
         // window.location.reload(false);
     }
