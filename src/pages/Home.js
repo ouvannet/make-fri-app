@@ -137,6 +137,7 @@ const Home = () => {
                 })
           }
         })
+        console.log("hello");
         Object.keys(data1).map((id,index)=>{
           if(data1[id].name==sessionStorage.getItem("Username")){
             console.log(data1);
