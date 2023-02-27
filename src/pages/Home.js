@@ -125,7 +125,46 @@ const Home = () => {
         }
       },[]);
       
-
+      var countbtn2=function(e){
+        Object.keys(data).map((id,index)=>{
+          if(data[id].name==sessionStorage.getItem("Username")){
+                fireDb.child(`contacts/${id}`).remove((err)=>{
+                  if(err){
+                    toast.error(err)
+                  }else{
+                    toast.success("Contact success delete!");
+                  }
+                })
+          }
+        })
+        
+        Object.keys(data1).map((id,index)=>{
+          if(data1[id].name==sessionStorage.getItem("Username")){
+            console.log(data1);
+            e.preventDefault();
+            const initialState33 = {
+              url:data1[id].url,
+              name1:data1[id].name1,
+              age:data1[id].age,
+              message:data1[id].message,
+              facebook:data1[id].facebook,
+              name:data1[id].name,
+              password:data1[id].password,
+              react1:0,
+              react2:0,
+              react3:0,
+              react4:0,
+            }
+            fireDb.child("contacts").push(initialState33,(err)=>{
+              if(err){
+                toast.error(err);
+              }else{
+                toast.success("Contact Added Successfully");
+              }
+            });
+          }
+        })
+      }
     console.log(data);
     const handleInputChange=(e)=>{
       const {name, value}=e.target;
