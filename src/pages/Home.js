@@ -15,7 +15,7 @@ import { from } from 'form-data';
 
 const initialState = {
   url:"",
-  name:"",
+  name1:"",
   age:"",
   message:"",
   react1:0,
@@ -28,6 +28,7 @@ const initialState = {
 const Home = () => {
     const [state,setState]=useState(initialState);
     const [data, setData]=useState({});
+    const [data1, setData1]=useState({});
     const [count, setCount]=useState(1);
     const [count1, setCount1]=useState(1);
     const [image, setImage] = useState(null);
@@ -94,12 +95,26 @@ const Home = () => {
         setCount1(count1-1);
       }
     }
-    // alert(count1);
 
     useEffect(()=>{
-        fireDb.child("contacts").on("value", (snapshot)=>{
-          console.log(snapshot);
-          if(snapshot.val()!==null){
+      fireDb.child("user").on("value", (snapshot)=>{
+        console.log(snapshot);
+        if(snapshot.val()!==null){
+          setData1({...snapshot.val() });
+        }else{
+          setData1({});
+        }
+      });
+      return()=>{
+        setData1({});
+      }
+    },[]);
+    // alert(count1);
+    
+    useEffect(()=>{
+      fireDb.child("contacts").on("value", (snapshot)=>{
+        console.log(snapshot);
+        if(snapshot.val()!==null){
             setData({...snapshot.val() });
           }else{
             setData({});
@@ -108,8 +123,47 @@ const Home = () => {
         return()=>{
           setData({});
         }
-    },[]);
-
+      },[]);
+      
+      var countbtn2=function(e){
+        Object.keys(data).map((id,index)=>{
+          if(data[id].name==sessionStorage.getItem("Username")){
+                fireDb.child(`contacts/${id}`).remove((err)=>{
+                  if(err){
+                    toast.error(err)
+                  }else{
+                    toast.success("Contact success delete!");
+                  }
+                })
+          }
+        })
+        Object.keys(data1).map((id,index)=>{
+          if(data1[id].name==sessionStorage.getItem("Username")){
+            console.log(data1);
+            e.preventDefault();
+            const initialState33 = {
+              url:data1[id].url,
+              name1:data1[id].name1,
+              age:data1[id].age,
+              message:data1[id].message,
+              facebook:data1[id].facebook,
+              name:data1[id].name,
+              password:data1[id].password,
+              react1:0,
+              react2:0,
+              react3:0,
+              react4:0,
+            }
+            fireDb.child("contacts").push(initialState33,(err)=>{
+              if(err){
+                toast.error(err);
+              }else{
+                toast.success("Contact Added Successfully");
+              }
+            });
+          }
+        })
+      }
     console.log(data);
     const handleInputChange=(e)=>{
       const {name, value}=e.target;
@@ -140,7 +194,7 @@ const Home = () => {
               return(
                 <div className='containerpic'>
                     <img src={data[id].url} width="100%" style={{borderRadius:"5px"}}/>
-                    <div className='forname'>{data[id].name}</div>
+                    <div className='forname'>{data[id].name1}</div>
                     <div className='forname1'>Age: {data[id].age}<img src="https://img.utdstc.com/icon/fe0/ab6/fe0ab67fa0de2b2681602db5708a076f50dd21106e0c2d38b9661875a37e235e:200" width="16px" style={{marginTop:"5px",borderRadius:"5px",marginLeft:"10px"}}/> {data[id].facebook}<br/>{data[id].message}</div>
                     <div style={{width:"100%",border:"0px solid black",height:"40px",marginTop:"5px",display:"flex"}}>
                       <table border="0px" style={{height:"100%",background:"#28f2e1",borderRadius:"5px"}}>
@@ -200,7 +254,7 @@ const Home = () => {
               </video>
               Create post
             </div>
-            <div className='upload3' style={{display:`${count==1?"none":""}`}}>
+            <div className='upload3' onClick={countbtn2} style={{display:`${count==1?"none":""}`}}>
               <video width="20%" style={{borderRadius:"50%",marginRight:"6px"}} preload="none"  autoPlay="autoplay" loop={true} muted="muted">
                 <source src="https://cdn-icons-mp4.flaticon.com/512/7740/7740748.mp4" type="video/mp4" />
               </video>

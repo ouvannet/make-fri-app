@@ -20,19 +20,19 @@ const initialState = {
   }
   
   const initialState1 = {
-    name: sessionStorage.getItem("Username"),
-    password: sessionStorage.getItem("Password"),
-    url:sessionStorage.getItem("url"),
-    name1:sessionStorage.getItem("name1"),
-    age:sessionStorage.getItem("age"),
-    message:sessionStorage.getItem("message"),
-    facebook:sessionStorage.getItem("facebook"),
+    name: sessionStorage.getItem("Username")?sessionStorage.getItem("Username"):"",
+    password: sessionStorage.getItem("Password")?sessionStorage.getItem("Password"):"",
+    url:sessionStorage.getItem("url")?sessionStorage.getItem("url"):"",
+    name1:sessionStorage.getItem("name1")?sessionStorage.getItem("name1"):"",
+    age:sessionStorage.getItem("age")?sessionStorage.getItem("age"):"",
+    message:sessionStorage.getItem("message")?sessionStorage.getItem("message"):"",
+    facebook:sessionStorage.getItem("facebook")?sessionStorage.getItem("facebook"):"",
     react1:0,
     react2:0,
     react3:0,
     react4:0,
   }
-
+// alert(sessionStorage.getItem("Password"))
 const Login = () => {
     const [state,setState]=useState(initialState);
     const [state1,setState1]=useState(initialState1);
@@ -199,6 +199,7 @@ const Login = () => {
         // }
       // window.location.reload(false);
     };
+    // alert();
   return (
     <div style={{marginTop:"10px"}}>
       {sessionStorage.getItem("Login")==null || sessionStorage.getItem("Login")=="" ?(
@@ -213,7 +214,9 @@ const Login = () => {
         </form>
       ):(
         Object.keys(data).map((id, index)=>{
+          console.log(data);
           if(data[id].name==sessionStorage.getItem("Username") && data[id].password==sessionStorage.getItem("Password")){
+            
             return(
               <div style={{width:"100%",border:"0px solid black",height:"95%",overflow:"scroll"}}>
                     <label htmlFor="file" className="file-style">
