@@ -19,6 +19,8 @@ const initialState = {
     react4:0,
   }
   
+  // alert(sessionStorage.getItem("Password"))
+  const Login = () => {
   const initialState1 = {
     name: sessionStorage.getItem("Username")?sessionStorage.getItem("Username"):"",
     password: sessionStorage.getItem("Password")?sessionStorage.getItem("Password"):"",
@@ -32,8 +34,6 @@ const initialState = {
     react3:0,
     react4:0,
   }
-// alert(sessionStorage.getItem("Password"))
-const Login = () => {
     const [state,setState]=useState(initialState);
     const [state1,setState1]=useState(initialState1);
     const [userinput1, setUserinput1] = useState('');

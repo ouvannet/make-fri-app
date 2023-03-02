@@ -16,6 +16,7 @@ import { from } from 'form-data';
 const initialState = {
   url:"",
   name1:"",
+  password:"",
   age:"",
   message:"",
   react1:0,
@@ -187,6 +188,25 @@ const Home = () => {
       }
       // window.location.reload(false);
     };
+
+    const react=(name,name1,age,facebook,message,password,react1,react2,react3,react4,url,idd)=>{
+      // alert(name+name1+age+facebook+message+password+react1+react2+react3+react4);
+      // console.log(idd);
+      const initialState22 = {
+        name: name,
+        password:password,
+        url:url,
+        name1:name1,
+        age:age,
+        message:message,
+        react1:react1,
+        react2:react2,
+        react3:react3,
+        react4:react4,
+      }
+      fireDb.child(`contacts/${idd}`).set(initialState22,(err)=>{
+      });
+    }
   return (
     <div>
       <div className='show_viewer'>
@@ -198,7 +218,7 @@ const Home = () => {
                     <div className='forname'>{data[id].name1}</div>
                     <div className='forname1'>Age: {data[id].age}<img src="https://img.utdstc.com/icon/fe0/ab6/fe0ab67fa0de2b2681602db5708a076f50dd21106e0c2d38b9661875a37e235e:200" width="16px" style={{marginTop:"5px",borderRadius:"5px",marginLeft:"10px"}}/> {data[id].facebook}<br/>{data[id].message}</div>
                     <div style={{width:"100%",border:"0px solid black",height:"40px",marginTop:"5px",display:"flex"}}>
-                      <table border="0px" style={{height:"100%",background:"#28f2e1",borderRadius:"5px"}}>
+                      <table border="0px" onClick={()=>react(data[id].name,data[id].name1,data[id].age,data[id].facebook,data[id].message,data[id].password,data[id].react1+1,data[id].react2,data[id].react3,data[id].react4,data[id].url,id)} style={{height:"100%",background:"#28f2e1",borderRadius:"5px"}}>
                         <tbody>
                           <tr>
                             <td><img src='https://cdn-icons-png.flaticon.com/512/2589/2589175.png' height="30px"></img></td>
@@ -206,27 +226,27 @@ const Home = () => {
                           </tr>
                         </tbody>
                       </table>
-                      <table border="0px" style={{height:"100%",background:"#28f2e1",marginLeft:"10px",borderRadius:"5px"}}>
+                      <table border="0px" onClick={()=>react(data[id].name,data[id].name1,data[id].age,data[id].facebook,data[id].message,data[id].password,data[id].react1,data[id].react2+1,data[id].react3,data[id].react4,data[id].url,id)} style={{height:"100%",background:"#28f2e1",marginLeft:"10px",borderRadius:"5px"}}>
                         <tbody>
                           <tr>
                             <td><img src='https://cdn-icons-png.flaticon.com/512/2589/2589220.png' height="30px"></img></td>
-                            <td width="60%">{data[id].react1}</td>
+                            <td width="60%">{data[id].react2}</td>
                           </tr>
                         </tbody>
                       </table>
-                      <table border="0px" style={{height:"100%",background:"#28f2e1",marginLeft:"10px",borderRadius:"5px"}}>
+                      <table border="0px" onClick={()=>react(data[id].name,data[id].name1,data[id].age,data[id].facebook,data[id].message,data[id].password,data[id].react1,data[id].react2,data[id].react3+1,data[id].react4,data[id].url,id)} style={{height:"100%",background:"#28f2e1",marginLeft:"10px",borderRadius:"5px"}}>
                         <tbody>
                           <tr>
                             <td><img src='https://cdn-icons-png.flaticon.com/512/2307/2307753.png' height="25px"></img></td>
-                            <td width="60%">{data[id].react1}</td>
+                            <td width="60%">{data[id].react3}</td>
                           </tr>
                         </tbody>
                       </table>
-                      <table border="0px" style={{height:"100%",background:"#28f2e1",marginLeft:"10px",borderRadius:"5px"}}>
+                      <table border="0px" onClick={()=>react(data[id].name,data[id].name1,data[id].age,data[id].facebook,data[id].message,data[id].password,data[id].react1,data[id].react2,data[id].react3,data[id].react4+1,data[id].url,id)} style={{height:"100%",background:"#28f2e1",marginLeft:"10px",borderRadius:"5px"}}>
                         <tbody>
                           <tr>
                             <td><img src='https://cdn-icons-png.flaticon.com/512/2307/2307739.png' height="25px"></img></td>
-                            <td width="60%">{data[id].react1}</td>
+                            <td width="60%">{data[id].react4}</td>
                           </tr>
                         </tbody>
                       </table>
